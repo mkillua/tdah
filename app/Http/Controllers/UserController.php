@@ -33,12 +33,23 @@ public $user;
 
     public function postUser()
     {
-
       $response =  $this->user->insertUser(Input::all());
         Log::info($response);
-        return json_encode($response);
-
-
+        if($response) {
+            return $this->apiReturn(true,"usuario inserido com sucesso",201);
+        }
+        return $this->apiReturn(false,"erro ao inserir usuario verifique as regras",401);
     }
+
+    public function getUsedEmail($email)
+    {
+        $response =  $this->user->getUsedEmail($email);
+        Log::info($response);
+        if(count($response)>1) {
+            return $this->apiReturn(true,"Email Disponivel",200);
+        }
+        return $this->apiReturn(false,"Email já utilizado",401);
+    }
+
 
 }

@@ -10,4 +10,14 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+
+
+    protected function apiReturn($success, $message, $code)
+    {
+        return \Response::json([
+            'success' =>$success,
+            'data' => $message],
+            $code
+        );
+    }
 }

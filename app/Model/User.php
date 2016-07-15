@@ -18,7 +18,7 @@ class User extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password','dt_nasc','sobrenome',
+        'name', 'email', 'password', 'dt_nasc', 'sobrenome',
     ];
 
     /**
@@ -37,14 +37,21 @@ class User extends Model
      * @param $password
      * @return \Illuminate\Database\Eloquent\Collection|static[]
      */
-    public function findAllUsers($email,$password)
+    public function findAllUsers($email, $password)
     {
-       return User::where(
-           'email',$email)
-           ->where(
-               'password',$password
-           );
+        return User::where(
+            'email', $email)
+            ->where(
+                'password', $password
+            );
     }
+
+    /**
+     * Método responsavel por registrar usuarios
+     * @autor Mauricio Rodrigues
+     * @param array (name,email,password)
+     * @return boolean
+     */
 
     public function insertUser($data)
     {
@@ -53,10 +60,21 @@ class User extends Model
             $user->name = $data['name'];
             $user->email = $data['email'];
             $user->password = sha1($data['password']);
-             $user->save();
-            return "usuario inserido com sucesso";
-        } catch (Exception $e) {
-            return 'erro ao inserir usuario';
+            $user->save();
+            return true;
+        } catch (\Exception $e) {
+           return false;
         }
+    }
+
+    /**
+     * Método responsavel por verificar se email já está cadastrado
+     * @autor Mauricio Rodrigues
+     * @param String Email
+     * @return object
+     */
+    public function getUsedEmail($data)
+    {
+        return User::where('email',$data);
     }
 }
