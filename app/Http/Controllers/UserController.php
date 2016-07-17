@@ -15,6 +15,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use App\Model\User as User;
 use Log;
+use JWTAuth;
+use Hash;
 
 class UserController extends Controller
 {
@@ -25,24 +27,35 @@ public $user;
         $this->user = $user;
     }
 
-    public function getUser($email,$password)
+    public function getUser($input)
     {
-        $password = sha1($password);
-        return $this->user->findAllUsers($email,$password)->get();
+        var_dump($input);
+        $dados = ['email'=>$email,'password'=>$password];
+        if (!$token = JWTAuth::attempt($dados)) {
+            return response()->json(['result' => 'wrong email or password.']);
+        }
+        var_dump($token);
+        return response()->json(['result' => $token]);
     }
+
+
+
+
 
     public function postUser()
     {
-      $response =  $this->user->insertUser(Input::all());
-        Log::info($response);
+        $dados = Input::all();
+        $dados['password'] =  Hash::make($dados['password']);
+        $response =  $this->user->create($dados);
         if($response) {
             return $this->apiReturn(true,"usuario inserido com sucesso",201);
         }
         return $this->apiReturn(false,"erro ao inserir usuario verifique as regras",401);
     }
 
-    public function getUsedEmail($email)
+    public function getEmail($email)
     {
+        dd('eu to aqui');
         $response =  $this->user->getUsedEmail($email);
         Log::info($response);
         if(count($response)>1) {

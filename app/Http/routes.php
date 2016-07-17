@@ -13,11 +13,15 @@
 
 
 
-Route::get('/', function () {
-    return view('welcome');
+Route::post('user/register','UserController@postUser');
+Route::get('user/login/{email}/{senha}','UserController@getUser');
+
+
+
+    Route::group(['middleware' => 'jwt-auth'], function () {
+
+        Route::controller('user', 'UserController');
 });
 
-Route::group(['middleware' => ['cors']], function () {
-    Route::controller('user', 'UserController');
-});
+
 
