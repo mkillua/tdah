@@ -23,4 +23,13 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+     * @param array $data
+     * @return mixed
+     */
+    public function getUser($data)
+    {
+      return User::where('email', $data['email']);
+    }
 }

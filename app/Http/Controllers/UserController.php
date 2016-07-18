@@ -21,48 +21,44 @@ use Hash;
 class UserController extends Controller
 {
 
-public $user;
+    public $user;
+
     public function __construct(User $user)
     {
         $this->user = $user;
     }
 
-    public function getUser($input)
+    public function getUser($email, $password)
     {
-        var_dump($input);
-        $dados = ['email'=>$email,'password'=>$password];
-        if (!$token = JWTAuth::attempt($dados)) {
-            return response()->json(['result' => 'wrong email or password.']);
+        $input = ['email' => $email, 'password' => $password];
+        if (!$token = JWTAuth::attempt($input)) {
+            return response()->json(['result' => 'email ou senha incorretos.'], 400);
         }
-        var_dump($token);
-        return response()->json(['result' => $token]);
+        $data = $this->user->getUser($input)->first();
+        $data['token'] = $token;
+        return $this->apiReturn(true, $data, 200);
     }
-
-
-
 
 
     public function postUser()
     {
         $dados = Input::all();
-        $dados['password'] =  Hash::make($dados['password']);
-        $response =  $this->user->create($dados);
-        if($response) {
-            return $this->apiReturn(true,"usuario inserido com sucesso",201);
+        $dados['password'] = Hash::make($dados['password']);
+        $response = $this->user->create($dados);
+        if ($response) {
+            return $this->apiReturn(true, "usuario inserido com sucesso", 201);
         }
-        return $this->apiReturn(false,"erro ao inserir usuario verifique as regras",401);
+        return $this->apiReturn(false, "erro ao inserir usuario verifique as regras", 401);
     }
 
     public function getEmail($email)
     {
         dd('eu to aqui');
-        $response =  $this->user->getUsedEmail($email);
+        $response = $this->user->getUsedEmail($email);
         Log::info($response);
-        if(count($response)>1) {
-            return $this->apiReturn(true,"Email Disponivel",200);
+        if (count($response) > 1) {
+            return $this->apiReturn(true, "Email Disponivel", 200);
         }
-        return $this->apiReturn(false,"Email já utilizado",401);
+        return $this->apiReturn(false, "Email já utilizado", 401);
     }
-
-
 }

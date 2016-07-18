@@ -14,7 +14,7 @@
 
 
 Route::post('user/register','UserController@postUser');
-Route::get('user/login/{email}/{senha}','UserController@getUser');
+Route::get('user/login/{email}/{password}','UserController@getUser');
 
 
 
