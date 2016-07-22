@@ -44,7 +44,7 @@ class UserController extends Controller
     {
         $dados = Input::all();
         $dados['password'] = Hash::make($dados['password']);
-        $response = $this->user->create($dados);
+        $response = $this->user->newUser($dados);
         if ($response) {
             return $this->apiReturn(true, "usuario inserido com sucesso", 201);
         }
