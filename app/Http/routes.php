@@ -16,11 +16,12 @@
 Route::post('user/register','UserController@postUser');
 Route::get('user/login/{email}/{password}','UserController@getUser');
 
+Route::controller('course', 'CourseController');
 
-
-    Route::group(['middleware' => 'jwt-auth'], function () {
+    Route::group(['middleware' => ['jwt-auth','roles']], function () {
 
         Route::controller('user', 'UserController');
+     
 });
 
 

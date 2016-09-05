@@ -53,7 +53,6 @@ class UserController extends Controller
 
     public function getEmail($email)
     {
-        dd('eu to aqui');
         $response = $this->user->getUsedEmail($email);
         Log::info($response);
         if (count($response) > 1) {
