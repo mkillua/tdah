@@ -1,0 +1,191 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "Api tdah",
+        "version": "1.0.0"
+    },
+    "basePath": "/",
+    "schemes": [
+        "http"
+    ],
+    "paths": {
+        "/course/category": {
+            "get": {
+                "tags": [
+                    "cursos"
+                ],
+                "summary": "Busca todas as categorias de cursos disponiveis",
+                "description": "Muliple tags can be provided with comma seperated strings. Use tag1, tag2, tag3 for testing.",
+                "operationId": "getUserByEmailAndPassword",
+                "consumes": [
+                    "application/xml",
+                    "application/json"
+                ],
+                "produces": [
+                    "application/xml",
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "object with datas of course",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definoitions/Pet"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "categorias n\u00e3o encontradas"
+                    }
+                }
+            }
+        },
+        "/user/login/{email}/{password}": {
+            "get": {
+                "tags": [
+                    "user"
+                ],
+                "summary": "Busca Usuario por email e senha",
+                "description": "Muliple tags can be provided with comma seperated strings. Use tag1, tag2, tag3 for testing.",
+                "operationId": "getUserByEmailAndPassword",
+                "consumes": [
+                    "application/xml",
+                    "application/json"
+                ],
+                "produces": [
+                    "application/xml",
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "email",
+                        "in": "path",
+                        "description": "email do usuario",
+                        "required": true,
+                        "type": "string",
+                        "items": {
+                            "type": "string"
+                        },
+                        "collectionFormat": "multi"
+                    },
+                    {
+                        "name": "password",
+                        "in": "path",
+                        "description": "password do usuario",
+                        "required": true,
+                        "type": "string",
+                        "items": {
+                            "type": "string"
+                        },
+                        "collectionFormat": "multi"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "object with name,email,token access,register date",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definoitions/Pet"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Usuario e senha n\u00e3o encontrado"
+                    }
+                }
+            }
+        },
+        "/user/register": {
+            "post": {
+                "tags": [
+                    "user"
+                ],
+                "summary": "Insere um novo usuario no sistema",
+                "description": "insere um novo usuario no sistema",
+                "operationId": "getUserByEmailAndPassword",
+                "consumes": [
+                    "application/xml",
+                    "application/json"
+                ],
+                "produces": [
+                    "application/xml",
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "email",
+                        "in": "query",
+                        "description": "email do usuario",
+                        "required": true,
+                        "type": "string",
+                        "items": {
+                            "type": "string"
+                        },
+                        "collectionFormat": "multi"
+                    },
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "Nome do usuario",
+                        "required": true,
+                        "type": "string",
+                        "items": {
+                            "type": "string"
+                        },
+                        "collectionFormat": "multi"
+                    },
+                    {
+                        "name": "password",
+                        "in": "query",
+                        "description": "password do usuario",
+                        "required": true,
+                        "type": "string",
+                        "items": {
+                            "type": "string"
+                        },
+                        "collectionFormat": "multi"
+                    },
+                    {
+                        "name": "passwordConfirm",
+                        "in": "query",
+                        "description": "email do usuario",
+                        "required": true,
+                        "type": "string",
+                        "items": {
+                            "type": "string"
+                        },
+                        "collectionFormat": "multi"
+                    },
+                    {
+                        "name": "role_id",
+                        "in": "query",
+                        "description": "1 para aluno 2 para professor",
+                        "required": true,
+                        "type": "integer",
+                        "items": {
+                            "type": "integer"
+                        },
+                        "collectionFormat": "multi"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "usuario cadastrado com sucesso",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definoitions/Pet"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "erro ao cadastrar, tente novamente"
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {}
+}

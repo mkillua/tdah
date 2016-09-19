@@ -92,9 +92,15 @@ return [
     */
 
     'custom' => [
-        'attribute-name' => [
-            'rule-name' => 'custom-message',
+        'question' => [
+            'required' => 'este campo é obrigatório',
+
         ],
+        'classId' => [
+            'required' => 'o id da aula é obrigatorio',
+            'numeric' => 'o id da aula precisa ser um numero inteiro',
+
+        ]
     ],
 
     /*
