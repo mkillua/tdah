@@ -100,6 +100,10 @@ return [
             'required' => 'o id da aula é obrigatorio',
             'numeric' => 'o id da aula precisa ser um numero inteiro',
 
+        ],
+        'questionId' => [
+            'required' => 'o id da questão é obrigatorio',
+            'numeric' =>  'o id da questão precisa ser um numero inteiro',
         ]
     ],
 

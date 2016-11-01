@@ -18,7 +18,7 @@ class Lesson extends Model
         return Lesson::where('status', 'habilitado');
     }
 
-    public function getClassById($idClass,$idCourse)
+    public function getClassByIdClass($idClass,$idCourse)
     {
         return Lesson::where('id', $idClass)->where('course_id',$idCourse);
     }
@@ -34,6 +34,7 @@ class Lesson extends Model
         $course->course_id = $data['courseId'];
         return $course->save();
     }
+    
 }
 
 

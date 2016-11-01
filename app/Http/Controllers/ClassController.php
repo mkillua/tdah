@@ -24,7 +24,7 @@ class ClassController extends Controller
 
     public function  getLesson($idClass,$idCourse)
     {
-        $lesson = $this->class->getClassById($idClass,$idCourse)->get();
+        $lesson = $this->class->getClassByIdClass($idClass,$idCourse)->get();
         if($lesson) {
             return $this->apiReturn(true, $lesson, 200);
         }

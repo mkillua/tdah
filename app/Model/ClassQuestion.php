@@ -18,9 +18,16 @@ class ClassQuestion extends Model
         return self::where('status', 'habilitado');
     }
 
-    public function getQuestionsById($id)
+    public function getQuestionsByIdClass($id)
     {
         return self::where('id_class', $id);
+    }
+
+    public function getQuestion($data)
+
+    {
+
+        return self::where('id', $data['questionId']);
     }
 
     public function newQuestion($data)
