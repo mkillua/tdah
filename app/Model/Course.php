@@ -35,4 +35,11 @@ class Course extends Model
         $course->user = '1';
         return $course->save();
     }
+
+    public function deleteCourse($id)
+    {
+
+       return Course::destroy($id);
+        
+    }
 }

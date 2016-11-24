@@ -138,6 +138,15 @@ class CourseController extends Controller
     {
         return $this->apiReturn(true, $this->course->getCourse()->get(), 200);
     }
+    
+    public function deleteCourse($id)
+    {
+
+        if($this->course->deleteCourse($id)) {
+            return $this->apiReturn(true, 'curso removido com sucesso', 200);
+        }
+        return $this->apiReturn(false, 'erro ao remover curso', 422);
+    }
 
 
 }

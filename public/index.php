@@ -1,11 +1,20 @@
+
+
 <?php
 
-/**
- * Laravel - A PHP Framework For Web Artisans
- *
- * @package  Laravel
- * @author   Taylor Otwell <taylorotwell@gmail.com>
- */
+
+
+header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+header('Access-Control-Max-Age: 1000');
+header('content-type: application/json');
+header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
+header('X-ACCESS_TOKEN',
+    'Access-Control-Allow-Origin',
+    'Authorization');
+
+
+
 
 /*
 |--------------------------------------------------------------------------
